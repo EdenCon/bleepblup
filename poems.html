@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,13 +17,20 @@
 
     h1 {
       font-size: 2.5rem;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
       text-align: center;
       text-shadow: 1px 1px 2px #ff99c8;
     }
 
+    h2 {
+      font-size: 1.8rem;
+      margin: 20px 0 10px 0;
+      text-align: center;
+      color: #ff6699;
+    }
+
     /* ===== POEM GRID ===== */
-    #poem-grid {
+    .poem-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
       gap: 15px;
@@ -55,46 +61,47 @@
     .poem-card span {
       font-weight: bold;
     }
-
-    /* ===== POEM TYPE LABEL ===== */
-    .tagalog {
-      border-color: #ff6699;
-    }
-
-    .english {
-      border-color: #d6336c;
-    }
   </style>
 </head>
 <body>
   <h1>Poems</h1>
-  <div id="poem-grid"></div>
+
+  <h2>Tagalog Poems</h2>
+  <div id="tagalog-grid" class="poem-grid"></div>
+
+  <h2>English Poems</h2>
+  <div id="english-grid" class="poem-grid"></div>
 
   <script>
     // ===== POEMS DATA =====
-    // Add all your poems here (15 Tagalog, 15 English)
     const poems = [
+      // Tagalog Poems
       { title: "Poem #1", language: "Tagalog", content: "Your Tagalog poem #1 content goes here..." },
       { title: "Poem #2", language: "Tagalog", content: "Your Tagalog poem #2 content goes here..." },
       { title: "Poem #3", language: "Tagalog", content: "Your Tagalog poem #3 content goes here..." },
+      // English Poems
       { title: "Poem #1", language: "English", content: "Your English poem #1 content goes here..." },
       { title: "Poem #2", language: "English", content: "Your English poem #2 content goes here..." },
       { title: "Poem #3", language: "English", content: "Your English poem #3 content goes here..." },
-      // Add the remaining poems #4-#15 Tagalog and English in the same format
+      // Add remaining poems here (4-15 Tagalog, 4-15 English)
     ];
 
-    const grid = document.getElementById('poem-grid');
+    const tagalogGrid = document.getElementById('tagalog-grid');
+    const englishGrid = document.getElementById('english-grid');
 
-    poems.forEach((poem, index) => {
+    poems.forEach(poem => {
       const card = document.createElement('div');
       card.classList.add('poem-card');
-      card.classList.add(poem.language.toLowerCase()); // adds tagalog or english class
       card.innerHTML = `<span>${poem.title}</span>`;
       card.addEventListener('click', () => {
         alert(`Title: ${poem.title}\nLanguage: ${poem.language}\n\nContent:\n${poem.content}`);
-        // You can replace alert with a modal later for nicer UI
       });
-      grid.appendChild(card);
+
+      if(poem.language === "Tagalog") {
+        tagalogGrid.appendChild(card);
+      } else if(poem.language === "English") {
+        englishGrid.appendChild(card);
+      }
     });
   </script>
 </body>
